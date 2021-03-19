@@ -18,7 +18,7 @@ exports.up = function (knex) {
       tbl.boolean('task_completed').defaultTo(false);
       tbl
         .integer('project_id')
-        .usigned()
+        .unsigned()
         .notNullable()
         .references('project_id')
         .inTable('projects');
@@ -27,13 +27,13 @@ exports.up = function (knex) {
       tbl.increments('project_resource_id');
       tbl
         .integer('project_id')
-        .usigned()
+        .unsigned()
         .notNullable()
         .references('project_id')
         .inTable('projects');
       tbl
         .integer('resource_id')
-        .usigned()
+        .unsigned()
         .notNullable()
         .references('resource_id')
         .inTable('resources');
