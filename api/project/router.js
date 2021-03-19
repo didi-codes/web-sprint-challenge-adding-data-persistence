@@ -41,7 +41,7 @@ router.put('/:id', validateProject, validateProjectId, (req, res, next) => {
 });
 
 router.delete('/:id', validateProjectId, (req, res, next) => {
-  User.remove(req.params.id)
+  Project.remove(req.params.id)
     .then(() => {
       res.status(200).json({
         message: 'The Project has been deleted',

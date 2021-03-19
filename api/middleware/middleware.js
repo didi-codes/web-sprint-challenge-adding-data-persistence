@@ -51,14 +51,9 @@ async function validateResourceId(req, res, next) {
 }
 
 function validateResource(req, res, next) {
-  let alreadySeen = [];
   if (!req.body.resource_name) {
     res.status(400).json({
       message: 'Resource Name Is Required',
-    });
-  } else if (alreadySeen[req.body.resource_name]) {
-    res.status(404).json({
-      message: `Resource Name ${req.body.resource_name} already exists in database`,
     });
   } else {
     next();
