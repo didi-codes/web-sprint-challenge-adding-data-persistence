@@ -84,6 +84,10 @@ function validateTask(req, res, next) {
     res.status(400).json({
       message: 'Task Description Is Required',
     });
+  } else if (!req.body.project_id) {
+    res.status(404).json({
+      message: 'Project Id Is Required',
+    });
   } else {
     next();
   }
