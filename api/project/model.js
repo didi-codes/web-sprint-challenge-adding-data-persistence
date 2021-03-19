@@ -16,8 +16,28 @@ function create(project) {
     });
 }
 
+function update(id, project) {
+  return db('projects')
+    .where('project_id', id)
+    .update(project)
+    .then(() => {
+      return db('projects').where('project_id', id).first();
+    });
+}
+
+function remove(id) {
+    return db('projects')
+    .where('project_id', id)
+    .del()
+    .then(() => {
+        return db('projects')
+    })
+}
+
 module.exports = {
   get,
   getById,
   create,
+  update,
+  remove,
 };

@@ -1,6 +1,9 @@
 const express = require('express');
 const Project = require('./model');
-const { validateProjectId, validateProject } = require('../middleware/middleware');
+const {
+  validateProjectId,
+  validateProject,
+} = require('../middleware/middleware');
 
 const router = express.Router();
 
@@ -13,7 +16,7 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-router.get('/:id', validateProjectId, (req, res , next) => {
+router.get('/:id', validateProjectId, (req, res) => {
   res.status(200).json(req.project);
 });
 
@@ -23,7 +26,29 @@ router.post('/', validateProject, (req, res, next) => {
       res.status(201).json(project);
     })
     .catch((err) => {
-      next(err)
+      next(err);
+    });
+});
+
+router.put('/:id', validateProject, validateProjectId, (req, res, next) => {
+  Project.update(req.params.id, req.body)
+    .then((project) => {
+      res.status(201).json(project);
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
+
+router.delete('/:id', validateProjectId, (req, res, next) => {
+  User.remove(req.params.id)
+    .then(() => {
+      res.status(200).json({
+        message: 'The Project has been deleted',
+      });
+    })
+    .catch((err) => {
+      next(err);
     });
 });
 
