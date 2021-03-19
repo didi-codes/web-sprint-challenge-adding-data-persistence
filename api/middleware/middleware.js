@@ -19,6 +19,17 @@ async function validateProjectId(req, res, next) {
   }
 }
 
+function validateProject(req, res, next) {
+  if (!req.body.project_name) {
+    res.status(400).json({
+      message: 'Project Name Is Required',
+    });
+  } else {
+    next();
+  }
+}
+
 module.exports = {
   validateProjectId,
+  validateProject,
 };
